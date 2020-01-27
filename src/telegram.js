@@ -41,6 +41,7 @@ const _messageTypes = [
   'photo',
   'pinned_message',
   'poll',
+  'poll_answer',
   'sticker',
   'successful_payment',
   'supergroup_chat_created',
