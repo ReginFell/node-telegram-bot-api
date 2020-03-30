@@ -589,6 +589,7 @@ class TelegramBot extends EventEmitter {
     const shippingQuery = update.shipping_query;
     const preCheckoutQuery = update.pre_checkout_query;
     const poll = update.poll;
+    const pollAnswer = update.poll_answer;
 
     if (message) {
       debug('Process Update message %j', message);
@@ -669,6 +670,9 @@ class TelegramBot extends EventEmitter {
     } else if (poll) {
       debug('Process Update poll %j', poll);
       this.emit('poll', poll);
+    } else if (pollAnswer) {
+      debug('Process Update poll_answer %j', pollAnswer);
+      this.emit('poll_answer', pollAnswer);
     }
   }
 
@@ -684,6 +688,11 @@ class TelegramBot extends EventEmitter {
     form.chat_id = chatId;
     form.text = text;
     return this._request('sendMessage', { form });
+  }
+
+  sendDice(chatId, form = {}) {
+    form.chat_id = chatId;
+    return this._request('sendDice', { form });
   }
 
   /**
